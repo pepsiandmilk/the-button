@@ -1,0 +1,27 @@
+<app-modal id="settings">
+  <h1 class="text-2xl mb-4">Settings</h1>
+  <div class="grid grid-cols-3 gap-2">
+    <ng-container *ngFor="let kv of settings | keyvalue">
+      <p>{{ kv.key | camelCaseToWords | titlecase }}</p>
+      <p>{{ kv.value }}</p>
+      <ng-container [ngSwitch]="kv.value | typeof">
+        <input
+          *ngSwitchCase="'number'"
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          [(ngModel)]="settings[kv.key]"
+          (ngModelChange)="onChange()"
+        />
+        <input
+          *ngSwitchCase="'boolean'"
+          type="checkbox"
+          [(ngModel)]="settings[kv.key]"
+          (ngModelChange)="onChange()"
+        />
+        <div *ngSwitchDefault></div>
+      </ng-container>
+    </ng-container>
+  </div>
+</app-modal>

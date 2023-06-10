@@ -7,6 +7,7 @@
 
   <button
     class="flex bg-gray-500 hover:bg-gray-700 text-white font-bold p-4 rounded-full"
+    (click)="onShowSettings()"
   >
     <ion-icon class="text-4xl" name="settings"></ion-icon>
   </button>
@@ -25,3 +26,4 @@
   </button>
   <p class="text-center">Press the button</p>
 </div>
+<app-settings-modal />

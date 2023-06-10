@@ -1,0 +1,13 @@
+<div [class.hidden]="hidden" class="fixed inset-0 z-50 backdrop-blur p-4">
+  <div class="flex flex-col justify-center h-screen items-center">
+    <div class="bg-gray-500 p-4 rounded-lg">
+      <ng-content></ng-content>
+      <button
+        class="bg-blue-600 w-full hover:bg-blue-800 py-2 px-4 mt-4 rounded-xl"
+        (click)="close()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>

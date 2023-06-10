@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { SettingsService } from './settings.service';
 import { Settings } from './settings.model';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { Settings } from './settings.model';
 })
 export class AppComponent implements OnInit {
   private readonly _settingsService = inject(SettingsService);
+  private readonly _modalService = inject(ModalService);
   private _probability = 0;
 
   score = 0;
@@ -37,5 +39,9 @@ export class AppComponent implements OnInit {
     } else {
       this.score++;
     }
+  }
+
+  onShowSettings(): void {
+    this._modalService.open('settings');
   }
 }
