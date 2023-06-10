@@ -1,1 +1,23 @@
-<h1 class="text-red-600">The Button</h1>
+<div class="flex w-full absolute justify-between p-8">
+  <button
+    class="flex bg-gray-500 hover:bg-gray-700 text-white font-bold p-4 rounded-full"
+  >
+    <ion-icon class="text-4xl" name="trophy"></ion-icon>
+  </button>
+
+  <button
+    class="flex bg-gray-500 hover:bg-gray-700 text-white font-bold p-4 rounded-full"
+  >
+    <ion-icon class="text-4xl" name="settings"></ion-icon>
+  </button>
+</div>
+<div class="flex h-full flex-col justify-between items-center p-24 text-2xl">
+  <p>Max {{ highScore }}</p>
+  <button
+    class="red-button h-1/3 aspect-square bg-red-500 rounded-full text-gray-200 text-6xl shadow-2xl"
+    (click)="onClick()"
+  >
+    {{ score }}
+  </button>
+  <p>Press the button</p>
+</div>
