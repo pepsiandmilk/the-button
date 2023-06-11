@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalComponent } from './modal/modal.component';
-import { SettingsModalComponent } from './modal/settings-modal/settings-modal.component';
+import { SettingsModalComponent } from './settings-modal/settings-modal.component';
 import { CamelCaseToWordsPipe } from './camel-case-to-words.pipe';
 import { TypeofPipe } from './typeof.pipe';
 
