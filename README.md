@@ -1,3 +1,3 @@
 # The Button
 
-Press the button.
+[live demo](https://pepsiandmilk.github.io/the-button/)
