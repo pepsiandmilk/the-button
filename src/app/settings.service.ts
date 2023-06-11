@@ -1,11 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Settings } from './settings.model';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SettingsService implements OnInit {
+export class SettingsService {
   private readonly _defaultSettings: Settings = {
     showMax: true,
     showTotal: false,
@@ -19,7 +19,7 @@ export class SettingsService implements OnInit {
     this._defaultSettings
   );
 
-  ngOnInit(): void {
+  constructor() {
     if (!localStorage.getItem(this._settingsKey)) {
       localStorage.setItem(
         this._settingsKey,
