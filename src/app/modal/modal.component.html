@@ -1,9 +1,9 @@
 <div [class.hidden]="hidden" class="fixed inset-0 z-50 backdrop-blur p-4">
   <div class="flex flex-col justify-center h-screen items-center">
-    <div class="bg-gray-500 p-4 rounded-lg">
+    <div class="bg-gray-400 text-white p-4 rounded-lg">
       <ng-content></ng-content>
       <button
-        class="bg-blue-500 text-gray-800 hover:text-white w-full hover:bg-blue-600 py-2 px-4 mt-2 rounded-xl"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-full py-2 mt-2 rounded-xl"
         (click)="close()"
       >
         Close
