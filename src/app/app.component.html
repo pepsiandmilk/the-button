@@ -13,7 +13,7 @@
   </button>
 </div>
 <div class="flex h-full flex-col justify-between items-center p-24 text-2xl">
-  <div class="text-center">
+  <div *ngIf="settings$ | async as settings" class="text-center">
     <p *ngIf="settings.showMax">Max {{ highScore }}</p>
     <p *ngIf="settings.showTotal">Total {{ total }}</p>
     <p *ngIf="settings.showResets">Resets {{ resets }}</p>

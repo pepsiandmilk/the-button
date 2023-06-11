@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { SettingsService } from './settings.service';
 import { Settings } from './settings.model';
 import { ModalService } from './modal.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,10 @@ export class AppComponent implements OnInit {
   total = 0;
   resets = 0;
 
-  settings!: Settings;
+  settings$!: Observable<Settings>;
 
   ngOnInit(): void {
-    this.settings = this._settingsService.getSettings();
+    this.settings$ = this._settingsService.getSettings();
   }
 
   onClick(): void {

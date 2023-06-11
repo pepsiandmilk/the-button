@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Settings } from './settings.model';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SettingsService {
+export class SettingsService implements OnInit {
   private readonly _defaultSettings: Settings = {
     showMax: true,
     showTotal: false,
@@ -14,8 +15,11 @@ export class SettingsService {
   };
 
   private readonly _settingsKey = 'settings';
+  private readonly _settings = new BehaviorSubject<Settings>(
+    this._defaultSettings
+  );
 
-  getSettings(): Settings {
+  ngOnInit(): void {
     if (!localStorage.getItem(this._settingsKey)) {
       localStorage.setItem(
         this._settingsKey,
@@ -23,14 +27,20 @@ export class SettingsService {
       );
     }
 
-    return JSON.parse(localStorage.getItem(this._settingsKey)!);
+    this._settings.next(JSON.parse(localStorage.getItem(this._settingsKey)!));
+  }
+
+  getSettings(): Observable<Settings> {
+    return this._settings.asObservable();
   }
 
   updateSettings(settings: Partial<Settings>): void {
-    localStorage.setItem(
-      this._settingsKey,
-      JSON.stringify({ ...this.getSettings(), ...settings })
-    );
+    const currentSettings = this._settings.getValue();
+    const updatedSettings = { ...currentSettings, ...settings };
+
+    localStorage.setItem(this._settingsKey, JSON.stringify(updatedSettings));
+
+    this._settings.next(updatedSettings);
   }
 
   resetSettings(): void {
@@ -38,5 +48,7 @@ export class SettingsService {
       this._settingsKey,
       JSON.stringify(this._defaultSettings)
     );
+
+    this._settings.next(this._defaultSettings);
   }
 }
