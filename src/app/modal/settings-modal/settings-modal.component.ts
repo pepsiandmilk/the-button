@@ -16,7 +16,9 @@ export class SettingsModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._settingsSub = this._settingsService
       .getSettings()
-      .subscribe((settings) => (this.settings = settings));
+      .subscribe((settings) => {
+        this.settings = { ...settings };
+      });
   }
 
   ngOnDestroy(): void {

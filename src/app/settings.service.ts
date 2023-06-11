@@ -15,7 +15,7 @@ export class SettingsService {
   };
 
   private readonly _settingsKey = 'settings';
-  private readonly _settings = new BehaviorSubject<Settings>(
+  private readonly _settings = new BehaviorSubject<Readonly<Settings>>(
     this._defaultSettings
   );
 
@@ -30,7 +30,7 @@ export class SettingsService {
     this._settings.next(JSON.parse(localStorage.getItem(this._settingsKey)!));
   }
 
-  getSettings(): Observable<Settings> {
+  getSettings(): Observable<Readonly<Settings>> {
     return this._settings.asObservable();
   }
 
