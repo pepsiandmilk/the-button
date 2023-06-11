@@ -8,6 +8,7 @@ import { ModalComponent } from './modal/modal.component';
 import { SettingsModalComponent } from './settings-modal/settings-modal.component';
 import { CamelCaseToWordsPipe } from './camel-case-to-words.pipe';
 import { TypeofPipe } from './typeof.pipe';
+import { MenuModalComponent } from './menu-modal/menu-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TypeofPipe } from './typeof.pipe';
     SettingsModalComponent,
     CamelCaseToWordsPipe,
     TypeofPipe,
+    MenuModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

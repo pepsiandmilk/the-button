@@ -8,10 +8,10 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class SettingsService {
   private readonly _defaultSettings: Settings = {
     showMax: true,
-    showTotal: false,
-    showResets: false,
+    showTotal: true,
+    showResets: true,
     musicVolume: 0.5,
-    sfxVolume: 0.5,
+    sfxVolume: 1.0,
   };
 
   private readonly _settingsKey = 'settings';

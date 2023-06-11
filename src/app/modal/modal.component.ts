@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  inject,
+  EventEmitter,
+} from '@angular/core';
 import { ModalService } from '../modal.service';
 
 @Component({
@@ -8,6 +15,7 @@ import { ModalService } from '../modal.service';
 })
 export class ModalComponent implements OnInit {
   @Input({ required: true }) id!: string;
+  @Output() modalClosed = new EventEmitter<void>();
   private readonly _modalService = inject(ModalService);
   hidden = true;
 
@@ -21,5 +29,6 @@ export class ModalComponent implements OnInit {
 
   close() {
     this.hidden = true;
+    this.modalClosed.emit();
   }
 }

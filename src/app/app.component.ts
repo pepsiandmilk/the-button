@@ -31,10 +31,13 @@ export class AppComponent implements OnInit {
     this.highScore = this._userService.getData().highScore;
     this.total = this._userService.getData().total;
     this.resets = this._userService.getData().resets;
+
+    // hack
+    setTimeout(() => this._modalService.open('menu'));
   }
 
   onClick(): void {
-    this._audioService.playSound('button-click');
+    this._audioService.playTrack('button-click');
 
     this._probability++;
     this._userService.updateData({ total: ++this.total });
@@ -48,7 +51,7 @@ export class AppComponent implements OnInit {
       this.score = 0;
       this._probability = 0;
       this._userService.updateData({ resets: ++this.resets });
-      this._audioService.playSound('button-reset');
+      this._audioService.playTrack('button-reset');
     } else {
       this.score++;
     }
