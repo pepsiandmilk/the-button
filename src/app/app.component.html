@@ -12,7 +12,10 @@
     <ion-icon class="text-4xl" name="settings"></ion-icon>
   </button>
 </div>
-<div class="flex h-full flex-col justify-between items-center p-24 text-2xl">
+<div
+  [class.shake]="shake"
+  class="flex h-full flex-col justify-between items-center p-24 text-2xl"
+>
   <div *ngIf="settings$ | async as settings" class="text-center">
     <p *ngIf="settings.showMax">Max {{ highScore }}</p>
     <p *ngIf="settings.showTotal">Total {{ total }}</p>

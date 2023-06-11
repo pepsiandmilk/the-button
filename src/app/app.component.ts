@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
   private readonly _audioService = inject(AudioService);
   private _probability = 0;
 
+  shake = false;
+
   score = 0;
   highScore = 0;
   total = 0;
@@ -43,6 +45,9 @@ export class AppComponent implements OnInit {
     this._userService.updateData({ total: ++this.total });
 
     if (Math.floor(Math.random() * 100) <= this._probability) {
+      this.shake = true;
+      setTimeout(() => (this.shake = false), 200);
+
       if (this.score > this.highScore) {
         this.highScore = this.score;
         this._userService.updateData({ highScore: this.highScore });
