@@ -1,30 +1,50 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
+import { SettingsService } from './settings.service';
+import { Subscription } from 'rxjs';
+
+export type AudioTrackName = 'button-click' | 'button-reset';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AudioService {
+export class AudioService implements OnDestroy {
   private readonly _audioContext: AudioContext;
-  private _tracks: Map<string, MediaElementAudioSourceNode>;
+  private readonly _tracks: Map<string, MediaElementAudioSourceNode>;
+  private readonly _sfxGainNode: GainNode;
+  private readonly _settingsService = inject(SettingsService);
+  private readonly _settingsSub!: Subscription;
 
-  private _registerTrack(name: string, filePath: string): void {
+  private _registerTrack(name: AudioTrackName, filePath: string): void {
     const track = this._audioContext.createMediaElementSource(
       new Audio(filePath)
     );
 
-    track.connect(this._audioContext.destination);
+    track.connect(this._sfxGainNode);
     this._tracks.set(name, track);
   }
 
   constructor() {
     this._audioContext = new AudioContext();
     this._tracks = new Map<string, MediaElementAudioSourceNode>();
+    this._sfxGainNode = this._audioContext.createGain();
+
+    this._sfxGainNode.connect(this._audioContext.destination);
 
     this._registerTrack('button-click', 'assets/sounds/button-click.wav');
     this._registerTrack('button-reset', 'assets/sounds/button-reset.wav');
+
+    this._settingsSub = this._settingsService
+      .getSettings()
+      .subscribe(
+        (settings) => (this._sfxGainNode.gain.value = settings.sfxVolume)
+      );
   }
 
-  playSound(name: 'button-click' | 'button-reset'): void {
+  ngOnDestroy(): void {
+    this._settingsSub.unsubscribe();
+  }
+
+  playSound(name: AudioTrackName): void {
     const track = this._tracks.get(name);
 
     if (!track) {
