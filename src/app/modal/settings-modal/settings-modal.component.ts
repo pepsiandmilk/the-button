@@ -26,4 +26,8 @@ export class SettingsModalComponent implements OnInit, OnDestroy {
   onChange(): void {
     this._settingsService.updateSettings(this.settings);
   }
+
+  onReset(): void {
+    this._settingsService.resetSettings();
+  }
 }
