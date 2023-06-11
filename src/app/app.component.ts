@@ -4,6 +4,7 @@ import { Settings } from './settings.model';
 import { ModalService } from './modal.service';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
+import { AudioService } from './audio.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
   private readonly _settingsService = inject(SettingsService);
   private readonly _userService = inject(UserService);
   private readonly _modalService = inject(ModalService);
+  private readonly _audioService = inject(AudioService);
   private _probability = 0;
 
   score = 0;
@@ -32,6 +34,8 @@ export class AppComponent implements OnInit {
   }
 
   onClick(): void {
+    this._audioService.playSound('button-click');
+
     this._probability++;
     this._userService.updateData({ total: ++this.total });
 
@@ -44,6 +48,7 @@ export class AppComponent implements OnInit {
       this.score = 0;
       this._probability = 0;
       this._userService.updateData({ resets: ++this.resets });
+      this._audioService.playSound('button-reset');
     } else {
       this.score++;
     }
